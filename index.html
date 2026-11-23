@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DP Nahi, Apni Sakal Dekh 😂🤣😂</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #101010;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            padding: 25px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        p {
+            color: #bbbbbb;
+            line-height: 1.6;
+        }
+
+        button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 15px 22px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 18px;
+            margin-top: 20px;
+            display: none;
+            background: black;
+            transform: scaleX(-1);
+        }
+
+        #status {
+            color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+
+        <h1>DP nahi, apni sakal dekh 😂🤣😂</h1>
+
+        <p>DP nahi, apni sakal dekh lo!</p>
+
+        <p>Front-camera live preview kholne ke liye neeche tap karo.</p>
+
+        <button id="start" onclick="startCamera()">
+            Open Front Camera
+        </button>
+
+        <video id="video" autoplay playsinline muted></video>
+
+        <p id="status"></p>
+
+    </div>
+
+    <script>
+        let stream;
+
+        async function startCamera() {
+            const video = document.getElementById("video");
+            const status = document.getElementById("status");
+
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "user" },
+                    audio: false
+                });
+
+                video.srcObject = stream;
+                video.style.display = "block";
+                await video.play();
+
+                document.getElementById("start").style.display = "none";
+                status.innerText = "Lo ji, apni sakal dekh lo 😂";
+
+            } catch (error) {
+                status.innerText = "Camera permission allow karke dobara try karo.";
+            }
+        }
+    </script>
+</body>
+
+</html>
